@@ -1,5 +1,7 @@
 # TechMart Data Platform
 
+This repository is a hands-on end-to-end data engineering project built around an e-commerce use case, demonstrating how to move from raw data to analytics through data cleaning, SQL modeling, ETL pipeline development, incremental loading, dimensional warehouse design, and clickstream analysis. It highlights practical experience with Python, SQL, Spark, Pandas, and modern data workflow concepts while emphasizing reproducibility, modular design, and real-world tradeoffs in data processing.
+
 A single, connected project covering Steps 1–6 of the *Complete Data
 Engineering Roadmap for 2026* — instead of six disconnected exercises,
 every step reads or extends the **same fictional e-commerce store**
@@ -28,6 +30,22 @@ pip install -r requirements.txt
 
 PySpark also needs a JVM (Java 11+) on your machine — install a JDK if
 `java -version` doesn't already work.
+
+For Step 6 specifically, Spark requires a working Java runtime and, on Windows,
+a Hadoop-compatible environment for local Parquet writes. If your local Spark
+setup is not fully configured, you can still run the Pandas fallback in
+[step6_spark_clickstream/pandas_comparison.py](step6_spark_clickstream/pandas_comparison.py)
+to generate the same output structure for the clickstream workflow.
+
+### Environment notes
+
+Before running Step 6, verify that Java is installed with `java -version`.
+PySpark will not start without a working JVM. On Windows, local Spark Parquet
+writes may also require a Hadoop-compatible environment; if unavailable, use
+the Pandas fallback script to complete the workflow and inspect the same output
+structure. Local Windows-specific helpers such as `hadoop/bin/winutils.exe`
+and `hadoop/etc/hadoop/core-site.xml` are intentionally ignored in this repo
+and should be treated as machine-local setup artifacts.
 
 Run everything, in order:
 

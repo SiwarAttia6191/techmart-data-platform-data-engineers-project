@@ -20,6 +20,7 @@ step6_spark_clickstream/output_pandas/
 spark-warehouse/
 metastore_db/
 derby.log
+hadoop/
 
 # Python
 __pycache__/

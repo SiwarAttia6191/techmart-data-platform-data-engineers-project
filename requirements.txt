@@ -1,6 +1,10 @@
+# Core project dependencies
 pandas>=2.2
 pyarrow>=16.0
 faker>=25.0
 requests>=2.31
 flask>=3.0
 pyspark>=3.5
+
+# Step 6 Spark note: a working JDK (Java 11+) is required for PySpark, and on
+# Windows local Parquet writes may need a Hadoop/WinUtils-compatible setup.

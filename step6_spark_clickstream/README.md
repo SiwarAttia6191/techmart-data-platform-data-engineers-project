@@ -9,6 +9,16 @@ The clickstream events are tied to the same `customer_id` / `product_id`
 keys as every other step — this is TechMart shoppers browsing before
 (maybe) buying.
 
+## Prerequisites
+
+- A working JDK (Java 11+). PySpark will not start without a JVM.
+- `pip install -r requirements.txt` to install the Python dependencies.
+- On Windows, local Parquet writes from Spark may require a Hadoop-compatible
+  setup such as a WinUtils-compatible environment. If your local Spark setup is
+  not fully configured, the Pandas fallback in
+  [pandas_comparison.py](pandas_comparison.py) can still produce the same
+  output structure for the workshop.
+
 ## Run
 
 ```bash
@@ -17,8 +27,8 @@ python3 step6_spark_clickstream/spark_pipeline.py
 python3 step6_spark_clickstream/pandas_comparison.py
 ```
 
-Requires a JVM (PySpark needs one) — `pip install pyspark` alone isn't
-enough; see the root `README.md` for setup.
+The Spark job is the environment-dependent path here; the Pandas script is the
+fallback that is reliable in simpler local setups.
 
 ## What actually happened when we ran this
 

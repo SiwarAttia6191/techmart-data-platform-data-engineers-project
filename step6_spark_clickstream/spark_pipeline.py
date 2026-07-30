@@ -33,6 +33,9 @@ def build_spark():
         .config("spark.sql.shuffle.partitions", "8")  # small cluster -> keep shuffle partitions modest
         .config("spark.driver.memory", "2g")
         .config("spark.sql.ansi.enabled", "false")  # malformed timestamps -> NULL, not a thrown error
+        .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "2")
+        .config("spark.hadoop.mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
+        .config("spark.sql.sources.commitProtocolClass", "org.apache.spark.sql.execution.datasources.FileCommitProtocol")
         .getOrCreate()
     )
 
@@ -121,6 +124,8 @@ def main():
 
     # 6 & 7. Write partitioned Parquet
     OUT_DIR.mkdir(exist_ok=True)
+    for target in ["sessions", "daily_summary", "product_daily"]:
+        (OUT_DIR / target).mkdir(exist_ok=True)
     sessions.write.mode("overwrite").partitionBy("event_date").parquet(str(OUT_DIR / "sessions"))
     daily_agg.write.mode("overwrite").parquet(str(OUT_DIR / "daily_summary"))
     product_agg.write.mode("overwrite").partitionBy("event_date").parquet(str(OUT_DIR / "product_daily"))
